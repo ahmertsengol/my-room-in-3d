@@ -10,6 +10,7 @@ import Renderer from './Renderer.js'
 import Camera from './Camera.js'
 import World from './World.js'
 import Navigation from './Navigation.js'
+import Interactivity from './Interactivity.js'
 
 import assets from './assets.js'
 
@@ -45,6 +46,7 @@ export default class Experience
         this.setResources()
         this.setWorld()
         this.setNavigation()
+        this.setInteractivity()
         
         this.sizes.on('resize', () =>
         {
@@ -136,6 +138,11 @@ export default class Experience
         this.navigation = new Navigation()
     }
 
+    setInteractivity()
+    {
+        this.interactivity = new Interactivity()
+    }
+
     update()
     {
         if(this.stats)
@@ -151,6 +158,9 @@ export default class Experience
 
         if(this.navigation)
             this.navigation.update()
+
+        if(this.interactivity)
+            this.interactivity.update()
 
         window.requestAnimationFrame(() =>
         {

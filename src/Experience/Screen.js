@@ -4,18 +4,21 @@ import Experience from './Experience.js'
 
 export default class Screen
 {
-    constructor(_mesh, _sourcePath)
+    constructor(_mesh, _sourcePath, _options = {})
     {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.scene = this.experience.scene
         this.world = this.experience.world
+        this.interactivity = this.experience.interactivity
 
         this.mesh = _mesh
         this.sourcePath = _sourcePath
+        this.clickAction = _options.clickAction || null
 
         this.setModel()
+        this.setInteractivity()
     }
 
     setModel()
@@ -45,6 +48,33 @@ export default class Screen
         this.model.mesh = this.mesh
         this.model.mesh.material = this.model.material
         this.scene.add(this.model.mesh)
+    }
+
+    setInteractivity()
+    {
+        if(this.interactivity && this.clickAction)
+        {
+            this.interactivity.registerClickable(
+                this.model.mesh,
+                {
+                    onClick: () =>
+                    {
+                        if(this.clickAction)
+                        {
+                            this.clickAction()
+                        }
+                    },
+                    onHover: () =>
+                    {
+                        // Optional: Add hover effect
+                    },
+                    onHoverOut: () =>
+                    {
+                        // Optional: Remove hover effect
+                    }
+                }
+            )
+        }
     }
 
     update()

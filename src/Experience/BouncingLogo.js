@@ -12,6 +12,7 @@ export default class BouncingLogo
         this.scene = this.experience.scene
         this.world = this.experience.world
         this.time = this.experience.time
+        this.interactivity = this.experience.interactivity
 
         // Debug
         if(this.debug)
@@ -24,6 +25,7 @@ export default class BouncingLogo
 
         this.setModel()
         this.setAnimation()
+        this.setInteractivity()
     }
 
     setModel()
@@ -193,5 +195,42 @@ export default class BouncingLogo
 
         this.model.mesh.position.z = this.animations.z
         this.model.mesh.position.y = this.animations.y
+    }
+
+    setInteractivity()
+    {
+        if(this.interactivity)
+        {
+            this.interactivity.registerClickable(
+                this.model.mesh,
+                {
+                    onClick: () =>
+                    {
+                        // Open social panel when logo is clicked
+                        const socialPanel = document.getElementById('socialPanel')
+                        if(socialPanel)
+                        {
+                            socialPanel.classList.add('active')
+                        }
+                    },
+                    onHover: () =>
+                    {
+                        // Optional: Add hover effect
+                        if(this.model.material)
+                        {
+                            this.model.material.opacity = 0.8
+                        }
+                    },
+                    onHoverOut: () =>
+                    {
+                        // Optional: Remove hover effect
+                        if(this.model.material)
+                        {
+                            this.model.material.opacity = 1
+                        }
+                    }
+                }
+            )
+        }
     }
 }

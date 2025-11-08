@@ -73,11 +73,25 @@ export default class World
     {
         this.pcScreen = new Screen(
             this.resources.items.pcScreenModel.scene.children[0],
-            '/assets/videoPortfolio.mp4'
+            '/assets/videoPortfolio.mp4',
+            {
+                clickAction: () =>
+                {
+                    // Open GitHub profile when PC screen is clicked
+                    window.open('https://github.com/ahmertsengol', '_blank')
+                }
+            }
         )
         this.macScreen = new Screen(
             this.resources.items.macScreenModel.scene.children[0],
-            '/assets/videoStream.mp4'
+            '/assets/videoStream.mp4',
+            {
+                clickAction: () =>
+                {
+                    // Open website when Mac screen is clicked
+                    window.open('https://www.ahmertsengol.com', '_blank')
+                }
+            }
         )
     }
 

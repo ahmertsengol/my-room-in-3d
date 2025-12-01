@@ -19,4 +19,8 @@ npm run dev
 
 # Build for production in the dist/ directory
 npm run build
+
+# Start production server (serves dist/ directory)
+# Listens on PORT environment variable or defaults to 8080
+npm run start
 ```

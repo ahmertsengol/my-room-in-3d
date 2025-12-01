@@ -3,8 +3,14 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config ./bundler/webpack.prod.js",
+    "build:docker": "npm ci --only=production=false && npm run build",
     "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config ./bundler/webpack.dev.js",
-    "prod": "git switch prod; git merge main; git push; git switch main"
+    "prod": "git switch prod; git merge main; git push; git switch main",
+    "prebuild": "echo 'Starting build process...'",
+    "postbuild": "echo 'Build completed successfully!'",
+    "docker:build": "docker build -t my-room-in-3d .",
+    "docker:run": "docker run -p 8080:80 my-room-in-3d",
+    "start": "node scripts/start-server.js"
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
@@ -31,5 +37,8 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
   }
 }
